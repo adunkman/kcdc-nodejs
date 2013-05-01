@@ -3,7 +3,7 @@ var httpProxy = require("http-proxy");
 var proxyServer = httpProxy.createServer(function (req, res, proxy) {
   var destinations = {
     "default": {
-      host: "www.nodelabs.org",
+      host: "pure-caverns-9069.herokuapp.com",
       port: 80
     },
     "messages": {
