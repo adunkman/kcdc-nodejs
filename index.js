@@ -3,19 +3,23 @@ var httpProxy = require("http-proxy");
 var proxyServer = httpProxy.createServer(function (req, res, proxy) {
   var destinations = {
     "default": {
-      host: "pure-caverns-9069.herokuapp.com",
+      host: "adunkman.github.com/workshop",
       port: 80
     },
-    "messages": {
-      host: "immense-brook-2467.herokuapp.com",
+    "achievements": {
+      host: "nodelabs-adunkman.herokuapp.com",
       port: 80
     }
   };
 
-  var destination = destinations["default"];
+  var destination;
 
-  if (req.url.match(/^\/messages/i)) {
-    destination = destinations["messages"];
+  if (req.url.match(/^\/achievements/i) || req.url.match(/^\/socket\.io/i)) {
+    destination = destinations["achievements"];
+  }
+  else {
+    destination = destinations["default"];
+    req.url = "/workshop" + req.url;
   }
 
   console.log("Proxying " + req.url + " to " + destination.host);
