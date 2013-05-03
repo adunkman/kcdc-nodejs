@@ -6,7 +6,7 @@ var proxyServer = httpProxy.createServer(function (req, res, proxy) {
       host: process.env.LABS_HOST || "localhost",
       port: process.env.LABS_PORT || 4000
     },
-    "achievements": {
+    "node": {
       host: process.env.NODE_HOST || "localhost",
       port: process.env.NODE_PORT || 4040
     }
@@ -14,15 +14,17 @@ var proxyServer = httpProxy.createServer(function (req, res, proxy) {
 
   var destination;
 
-  if (req.url.match(/^\/achievements/i) || req.url.match(/^\/socket\.io/i)) {
-    destination = destinations["achievements"];
+  if (req.url.match(/^\/status/i) ||
+      req.url.match(/^\/socket\.io/i) ||
+      req.url.match(/^\/admin/i)) {
+    destination = destinations["node"];
   }
   else {
     destination = destinations["default"];
     req.url = "/workshop" + req.url;
   }
 
-  console.log("Proxying " + req.url + " to " + destination.host);
+  console.log("Proxying " + req.url + " to " + destination.host + ":" + destination.port);
   req.headers.host = destination.host;
   proxy.proxyRequest(req, res, destination);
 });
