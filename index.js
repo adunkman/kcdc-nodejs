@@ -3,7 +3,7 @@ var httpProxy = require("http-proxy");
 var proxyServer = httpProxy.createServer(function (req, res, proxy) {
   var destinations = {
     "default": {
-      host: "adunkman.github.io/workshop",
+      host: "adunkman.github.io",
       port: 80
     },
     "achievements": {
