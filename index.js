@@ -3,12 +3,12 @@ var httpProxy = require("http-proxy");
 var proxyServer = httpProxy.createServer(function (req, res, proxy) {
   var destinations = {
     "default": {
-      host: "adunkman.github.io",
-      port: 80
+      host: process.env.LABS_HOST || "localhost",
+      port: process.env.LABS_PORT || 4000
     },
     "achievements": {
-      host: "nodelabs-adunkman.herokuapp.com",
-      port: 80
+      host: process.env.NODE_HOST || "localhost",
+      port: process.env.NODE_PORT || 4040
     }
   };
 
