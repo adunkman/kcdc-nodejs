@@ -14,9 +14,7 @@ var proxyServer = httpProxy.createServer(function (req, res, proxy) {
 
   var destination;
 
-  if (req.url.match(/^\/status/i) ||
-      req.url.match(/^\/socket\.io/i) ||
-      req.url.match(/^\/admin/i)) {
+  if (req.url.match(/^\/(status|socket\.io|unlock|admin)/i)) {
     destination = destinations["node"];
   }
   else {
